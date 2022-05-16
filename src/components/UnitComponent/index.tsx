@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, Image, TouchableWithoutFeedback} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
+import orderedCurrentTeam from '../../gameLogic/orderedCurrentTeam';
 import GameUnit from '../../gameUnits/gameUnit';
 import {
+  currentTeamChange,
   currentUnitChange,
   orderedTeamChange,
 } from '../../redux/actions/gameActions';
@@ -15,25 +17,36 @@ export type Props = {
 };
 
 const Unit: React.FC<Props> = ({unit, team}) => {
+  const currentTeam: 1 | 2 = useSelector(
+    ({gameReducer}) => gameReducer.currentTeam,
+  );
   const currentUnit: GameUnit = useSelector(
     ({gameReducer}) => gameReducer.currentUnit,
   );
   const orderedTeam: Array<GameUnit> = useSelector(
     ({gameReducer}) => gameReducer.orderedCurrentTeam,
   );
-  const [unitHp, setUnitHp] = useState(unit.hp);
+  const team1: teamState = useSelector(({teamsReducer}) => teamsReducer.team1);
+  const team2: teamState = useSelector(({teamsReducer}) => teamsReducer.team2);
   const dispatch = useDispatch();
+  const [unitHp, setUnitHp] = useState(unit.hp);
 
   const handleChange = (): void => {
     currentUnit.Action.doAction([unit, unit], currentUnit);
     setUnitHp(unit.hp);
-    const newCurrentUnit = orderedTeam.pop();
-    dispatch(orderedTeamChange(orderedTeam));
-    dispatch(currentUnitChange(newCurrentUnit));
-    console.log('\n');
-    orderedTeam.map((item) => {
-      console.log(item.unitName);
-    })
+    if (orderedTeam.length > 0) {
+      const newCurrentUnit = orderedTeam.pop();
+      dispatch(orderedTeamChange(orderedTeam));
+      dispatch(currentUnitChange(newCurrentUnit));
+    } else {
+      dispatch(currentTeamChange(currentTeam === 1 ? 2 : 1));
+      const newOrderedTeam = orderedCurrentTeam(
+        currentTeam === 1 ? team2 : team1,
+      );
+      const newcurrentUnit = newOrderedTeam.pop();
+      dispatch(orderedTeamChange(newOrderedTeam));
+      dispatch(currentUnitChange(newcurrentUnit));
+    }
   };
 
   return (

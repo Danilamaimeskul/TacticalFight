@@ -1,7 +1,7 @@
 import GameUnit from '../../gameUnits/gameUnit';
 import types from '../types';
 
-export const currentTeamChange = (teamNumber: 0 | 1) => ({
+export const currentTeamChange = (teamNumber: 1 | 2) => ({
   type: types.CURRENT_TEAM_CHANGE,
   payload: teamNumber,
 });

@@ -44,6 +44,7 @@ const App = () => {
     const currentUnit = orderedTeam1.pop();
     dispatch(team1Change(team1));
     dispatch(team2Change(team2));
+    dispatch(currentTeamChange(1));
     dispatch(orderedTeamChange(orderedTeam1));
     dispatch(currentUnitChange(currentUnit));
   }, []);
