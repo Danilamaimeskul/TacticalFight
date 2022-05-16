@@ -9,7 +9,7 @@ import Sirena from '../gameUnits/units/Sirena';
 import Skeleton from '../gameUnits/units/Skeleton';
 import SkeletonMage from '../gameUnits/units/SkeletonMage';
 
-const generateTeam = (numberUnits: number, teamNumber: number) => {
+const generateTeam = (numberUnits: number, teamNumber: 1 | 2) => {
   let team: Array<GameUnit> = [];
   for (let i = 0; i < numberUnits; i++) {
     let xPosition: number = i % 3;
@@ -17,31 +17,31 @@ const generateTeam = (numberUnits: number, teamNumber: number) => {
     let id = (teamNumber - 1) * numberUnits + i;
     switch (Math.floor(Math.random() * 9)) {
       case 0:
-        team.push(Archimage({xPosition, yPosition, id}));
+        team.push(Archimage({xPosition, yPosition, id, team: teamNumber}));
         break;
       case 1:
-        team.push(Bandit({xPosition, yPosition, id}));
+        team.push(Bandit({xPosition, yPosition, id, team: teamNumber}));
         break;
       case 2:
-        team.push(Bishop({xPosition, yPosition, id}));
+        team.push(Bishop({xPosition, yPosition, id, team: teamNumber}));
         break;
       case 3:
-        team.push(Centaur({xPosition, yPosition, id}));
+        team.push(Centaur({xPosition, yPosition, id, team: teamNumber}));
         break;
       case 4:
-        team.push(ElfArcher({xPosition, yPosition, id}));
+        team.push(ElfArcher({xPosition, yPosition, id, team: teamNumber}));
         break;
       case 5:
-        team.push(Monk({xPosition, yPosition, id}));
+        team.push(Monk({xPosition, yPosition, id, team: teamNumber}));
         break;
       case 6:
-        team.push(Sirena({xPosition, yPosition, id}));
+        team.push(Sirena({xPosition, yPosition, id, team: teamNumber}));
         break;
       case 7:
-        team.push(Skeleton({xPosition, yPosition, id}));
+        team.push(Skeleton({xPosition, yPosition, id, team: teamNumber}));
         break;
       case 8:
-        team.push(SkeletonMage({xPosition, yPosition, id}));
+        team.push(SkeletonMage({xPosition, yPosition, id, team: teamNumber}));
     }
   }
   return team;

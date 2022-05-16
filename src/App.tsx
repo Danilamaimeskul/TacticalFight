@@ -20,9 +20,11 @@ import {
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {useDispatch, useSelector} from 'react-redux';
 import TeamComponent from './components/TeamComponent';
+import UnitCard from './components/UnitCard';
 import Unit from './components/UnitComponent';
 import generateTeam from './gameLogic/generateTeam';
 import orderedCurrentTeam from './gameLogic/orderedCurrentTeam';
+import GameUnit from './gameUnits/gameUnit';
 import {
   currentTeamChange,
   currentUnitChange,
@@ -33,6 +35,11 @@ import {teamState} from './redux/reducers/teamsReducer';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
+
+  const orderedTeam: Array<GameUnit> = useSelector(({gameReducer}) => [
+    ...gameReducer.orderedCurrentTeam,
+    gameReducer.currentUnit,
+  ]);
 
   const team: teamState = useSelector(({teamsReducer}) => teamsReducer);
   const dispatch = useDispatch(team);
@@ -63,6 +70,11 @@ const App = () => {
         {team.team2.length ? (
           <TeamComponent heroes={team.team2} teamNumber={2} />
         ) : null}
+        <View style={{flexDirection: 'row'}}>
+          {orderedTeam.map((item, index) => {
+            return <UnitCard unit={item} key={index} />;
+          })}
+        </View>
       </ScrollView>
     </SafeAreaView>
   );

@@ -7,6 +7,7 @@ const Monk = (props: GameUnitPropsType): GameUnit => {
     props.xPosition,
     props.yPosition,
     props.id,
+    props.team,
     'Monk',
     90,
     20,

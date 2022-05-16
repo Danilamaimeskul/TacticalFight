@@ -7,6 +7,7 @@ const Bandit = (props: GameUnitPropsType): GameUnit => {
     props.xPosition,
     props.yPosition,
     props.id,
+    props.team,
     'Bandit',
     75,
     60,

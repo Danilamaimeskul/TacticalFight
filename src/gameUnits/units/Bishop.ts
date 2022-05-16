@@ -7,6 +7,7 @@ const Bishop = (props: GameUnitPropsType): GameUnit => {
     props.xPosition,
     props.yPosition,
     props.id,
+    props.team,
     'Bishop',
     130,
     20,

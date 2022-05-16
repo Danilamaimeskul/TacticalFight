@@ -7,6 +7,7 @@ const Skeleton = (props: GameUnitPropsType): GameUnit => {
     props.xPosition,
     props.yPosition,
     props.id,
+    props.team,
     'Skeleton',
     100,
     50,

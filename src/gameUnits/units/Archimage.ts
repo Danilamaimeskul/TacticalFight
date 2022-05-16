@@ -7,6 +7,7 @@ const Archimage = (props: GameUnitPropsType): GameUnit => {
     props.xPosition,
     props.yPosition,
     props.id,
+    props.team,
     'Archimage',
     90,
     30,

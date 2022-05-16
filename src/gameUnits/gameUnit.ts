@@ -4,6 +4,7 @@ class GameUnit {
   xPosition: number;
   yPosition: number;
   id: number;
+  team: 1 | 2;
   unitName: string;
   maxHP: number;
   hp: number;
@@ -19,6 +20,7 @@ class GameUnit {
     xPosition: number,
     yPosition: number,
     id: number,
+    team: 1 | 2,
     unitName: string,
     hp: number,
     initiative: number,
@@ -30,6 +32,7 @@ class GameUnit {
     this.damage = damage;
     this.heal = heal;
     this.maxHP = hp;
+    this.team = team;
     this.hp = hp;
     this.id = id;
     this.image = image;

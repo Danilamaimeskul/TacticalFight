@@ -48,22 +48,41 @@ const Unit: React.FC<Props> = ({unit, team}) => {
       dispatch(currentUnitChange(newcurrentUnit));
     }
   };
-
-  return (
-    <TouchableWithoutFeedback onPress={handleChange}>
+  // {unitHp > 0 ?  : null}
+  if (unitHp > 0) {
+    return (
+      <TouchableWithoutFeedback onPress={handleChange}>
+        <View
+          style={[
+            styles.unit,
+            unit.id === currentUnit?.id ? {backgroundColor: 'red'} : null,
+          ]}>
+          <Image style={styles.image} source={unit.image} />
+          <Text>HP: {unitHp}</Text>
+          {unit.heal && <Text>HEAL:{unit.heal}</Text>}
+          {unit.damage && <Text>DMG:{unit.damage}</Text>}
+          <Text>{unit.unitName}</Text>
+        </View>
+      </TouchableWithoutFeedback>
+    );
+  } else {
+    return (
       <View
         style={[
           styles.unit,
-          unit.id === currentUnit.id ? {backgroundColor: 'red'} : null,
+          unit.id === currentUnit?.id ? {backgroundColor: 'red'} : null,
         ]}>
-        <Image style={styles.image} source={unit.image} />
+        <Image
+          style={styles.image}
+          source={require('../../assets/gameUnitsImages/Grave.png')}
+        />
         <Text>HP: {unitHp}</Text>
         {unit.heal && <Text>HEAL:{unit.heal}</Text>}
         {unit.damage && <Text>DMG:{unit.damage}</Text>}
         <Text>{unit.unitName}</Text>
       </View>
-    </TouchableWithoutFeedback>
-  );
+    );
+  }
 };
 
 export default Unit;

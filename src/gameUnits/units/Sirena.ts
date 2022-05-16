@@ -7,6 +7,7 @@ const Sirena = (props: GameUnitPropsType): GameUnit => {
     props.xPosition,
     props.yPosition,
     props.id,
+    props.team,
     'Sirena',
     130,
     20,

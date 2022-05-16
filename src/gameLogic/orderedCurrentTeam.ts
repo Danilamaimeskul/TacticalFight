@@ -11,7 +11,10 @@ const orderedCurrentTeam = (team: Array<GameUnit>) => {
     }
     return 0;
   });
-  return orderedTeam;
+  const result = orderedTeam.filter(item => {
+    return item.hp > 0;
+  });
+  return result;
 };
 
 export default orderedCurrentTeam;

@@ -7,6 +7,7 @@ const Centaur = (props: GameUnitPropsType): GameUnit => {
     props.xPosition,
     props.yPosition,
     props.id,
+    props.team,
     'Centaur',
     150,
     50,

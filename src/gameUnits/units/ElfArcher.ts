@@ -7,6 +7,7 @@ const ElfArcher = (props: GameUnitPropsType): GameUnit => {
     props.xPosition,
     props.yPosition,
     props.id,
+    props.team,
     'ElfArcher',
     90,
     60,
