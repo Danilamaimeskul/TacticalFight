@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {View, Text, Image, StyleProp, ViewStyle} from 'react-native';
+import React from 'react';
+import {View} from 'react-native';
 import GameUnit from '../../gameUnits/gameUnit';
 import Unit from '../UnitComponent';
 import styles from './style';

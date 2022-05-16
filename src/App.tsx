@@ -10,18 +10,15 @@
 import React, {useEffect} from 'react';
 import {
   View,
-  Image,
   SafeAreaView,
   ScrollView,
   StatusBar,
-  Text,
   useColorScheme,
 } from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {useDispatch, useSelector} from 'react-redux';
 import TeamComponent from './components/TeamComponent';
 import UnitCard from './components/UnitCard';
-import Unit from './components/UnitComponent';
 import generateTeam from './gameLogic/generateTeam';
 import orderedCurrentTeam from './gameLogic/orderedCurrentTeam';
 import GameUnit from './gameUnits/gameUnit';

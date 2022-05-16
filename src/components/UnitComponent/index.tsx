@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {View, Text, Image, TouchableWithoutFeedback} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import orderedCurrentTeam from '../../gameLogic/orderedCurrentTeam';
@@ -8,7 +8,7 @@ import {
   currentUnitChange,
   orderedTeamChange,
 } from '../../redux/actions/gameActions';
-import StatusMark from '../StatusMark';
+import {MassHeal} from '../../strategy/Strategies';
 import styles from './style';
 
 export type Props = {
@@ -32,7 +32,11 @@ const Unit: React.FC<Props> = ({unit, team}) => {
   const [unitHp, setUnitHp] = useState(unit.hp);
 
   const handleChange = (): void => {
-    currentUnit.Action.doAction([unit, unit], currentUnit);
+    if (currentUnit.Action instanceof MassHeal) {
+      currentUnit.Action.doAction([...team1, ...team2], currentUnit);
+    } else {
+      currentUnit.Action.doAction([unit, unit], currentUnit);
+    }
     setUnitHp(unit.hp);
     if (orderedTeam.length > 0) {
       const newCurrentUnit = orderedTeam.pop();
@@ -48,7 +52,6 @@ const Unit: React.FC<Props> = ({unit, team}) => {
       dispatch(currentUnitChange(newcurrentUnit));
     }
   };
-  // {unitHp > 0 ?  : null}
   if (unitHp > 0) {
     return (
       <TouchableWithoutFeedback onPress={handleChange}>
