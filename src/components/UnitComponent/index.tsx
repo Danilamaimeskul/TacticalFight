@@ -61,7 +61,18 @@ const Unit: React.FC<Props> = ({unit, team}) => {
           <Text>HP: {unitHp}</Text>
           {unit.heal && <Text>HEAL:{unit.heal}</Text>}
           {unit.damage && <Text>DMG:{unit.damage}</Text>}
-          <Text>{unit.unitName}</Text>
+          {unit.isDefend && (
+            <Image
+              style={styles.shield}
+              source={require('../../assets/Shield.png')}
+            />
+          )}
+          {unit.isParalyzed && (
+            <Image
+              style={styles.paralyzed}
+              source={require('../../assets/stun.png')}
+            />
+          )}
         </View>
       </TouchableWithoutFeedback>
     );

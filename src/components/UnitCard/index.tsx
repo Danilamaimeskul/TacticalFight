@@ -14,6 +14,9 @@ const UnitCard: React.FC<UnitCardProps> = ({unit}) => {
     <View style={styles.card}>
       <View style={[styles.damaged, {height: `${height}%`}]} />
       <Image style={styles.image} source={unit?.image} />
+      <Text>
+        {unit?.hp}/{unit?.maxHP}
+      </Text>
     </View>
   );
 };

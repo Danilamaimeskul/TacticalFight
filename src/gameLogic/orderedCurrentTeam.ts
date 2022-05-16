@@ -12,7 +12,7 @@ const orderedCurrentTeam = (team: Array<GameUnit>) => {
     return 0;
   });
   const result = orderedTeam.filter(item => {
-    return item.hp > 0;
+    return item.hp > 0 && !item.isParalyzed;
   });
   return result;
 };

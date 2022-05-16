@@ -63,19 +63,19 @@ const App = () => {
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView>
+      <ScrollView style={{marginTop: 15, marginBottom: 45}}>
         {team.team1.length ? (
           <TeamComponent heroes={team.team1} teamNumber={1} />
         ) : null}
         {team.team2.length ? (
           <TeamComponent heroes={team.team2} teamNumber={2} />
         ) : null}
-        <View style={{flexDirection: 'row'}}>
-          {orderedTeam.map((item, index) => {
-            return <UnitCard unit={item} key={index} />;
-          })}
-        </View>
       </ScrollView>
+      <View style={{flexDirection: 'row'}}>
+        {orderedTeam.map((item, index) => {
+          return <UnitCard unit={item} key={index} />;
+        })}
+      </View>
     </SafeAreaView>
   );
 };

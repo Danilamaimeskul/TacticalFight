@@ -22,6 +22,18 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     opacity: 0.4,
   },
+  shield: {
+    position: 'absolute',
+    height: 30,
+    width: 25,
+  },
+  paralyzed: {
+    position: 'absolute',
+    left: 24,
+    height: 40,
+    width: 30,
+    tintColor: 'white',
+  },
 });
 
 export default styles;
