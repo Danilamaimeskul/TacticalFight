@@ -27,14 +27,14 @@ const App = () => {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  let team = generateTeam(6, 1);
+  let team = [...generateTeam(6, 1), ...generateTeam(6, 2)];
 
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <Board>
         {team.map((item, index) => {
-          return <Unit team={1} unit={item} key={index} />;
+          return <Unit team={1} unit={item} key={index} id={index} />;
         })}
       </Board>
     </SafeAreaView>

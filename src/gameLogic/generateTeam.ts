@@ -13,7 +13,7 @@ const generateTeam = (numberUnits: number, teamNumber: 1 | 2) => {
   let team: Array<GameUnit> = [];
   for (let i = 0; i < numberUnits; i++) {
     let xPosition: number = (i % 3) + 2;
-    let yPosition: number = Math.floor(i / 3) + (teamNumber * 2 - 2) + 2;
+    let yPosition: number = Math.floor(i / 3) + (teamNumber * 2 - 2) + 1;
     let id = (teamNumber - 1) * numberUnits + i;
     switch (Math.floor(Math.random() * 9)) {
       case 0:

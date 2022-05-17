@@ -7,16 +7,19 @@ import styles from './style';
 export type Props = {
   unit: GameUnit;
   team: number;
+  id: number;
 };
 
-const Unit: React.FC<Props> = ({unit, team}) => {
+const Unit: React.FC<Props> = ({unit, team, id}) => { // Добычу юнита убрать отсюда, юзСелектор
   const [biba, setBiba] = useState(unit.xPosition);
+
+  // Делаем единый стор для обеих команд, добывать сможем через teamReducer.team[id], который мы принимаем с Апп.тсх
 
   return (
     <View
       style={{
         position: 'absolute',
-        left: biba * cellSize,
+        left: unit.xPosition * cellSize + 5,
         top: unit.yPosition * cellSize,
         justifyContent: 'center',
         alignItems: 'center',
@@ -30,6 +33,7 @@ const Unit: React.FC<Props> = ({unit, team}) => {
           style={{width: cellSize - 10, height: cellSize - 10}}
         />
       </TouchableWithoutFeedback>
+      <Text>{id}</Text>  
     </View>
   );
 };
