@@ -11,7 +11,12 @@ export type TeamProps = {
 
 const TeamComponent: React.FC<TeamProps> = ({heroes, teamNumber}) => {
   return (
-    <View style={styles.team}>
+    <View
+      style={styles.team}
+      onLayout={event => {
+        const {x, y, height, width} = event.nativeEvent.layout;
+        console.log(height, width);
+      }}>
       {heroes.map((unit, index) => {
         return <Unit unit={unit} key={index} team={teamNumber} />;
       })}

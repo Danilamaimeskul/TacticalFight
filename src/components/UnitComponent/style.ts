@@ -1,26 +1,19 @@
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
-  unitName: {
-    width: 65,
-    height: 65,
-    textAlign: 'center',
-  },
+  // unitName: {
+  //   width: 50,
+  //   height: 50,
+  //   textAlign: 'center',
+  // },
   unit: {
     position: 'relative',
-    width: 65,
-    marginHorizontal: 25,
+    width: 40,
+    // marginHorizontal: 5,
   },
   image: {
-    width: 65,
-    height: 65,
-  },
-  background: {
-    position: 'absolute',
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    opacity: 0.4,
+    width: 40,
+    height: 40,
   },
   shield: {
     position: 'absolute',

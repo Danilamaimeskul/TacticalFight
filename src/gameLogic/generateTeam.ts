@@ -5,15 +5,15 @@ import Centaur from '../gameUnits/units/Centaur';
 import ElfArcher from '../gameUnits/units/ElfArcher';
 import GameUnit from '../gameUnits/gameUnit';
 import Monk from '../gameUnits/units/Monk';
-import Sirena from '../gameUnits/units/Sirena';
+import Siren from '../gameUnits/units/Siren';
 import Skeleton from '../gameUnits/units/Skeleton';
 import SkeletonMage from '../gameUnits/units/SkeletonMage';
 
 const generateTeam = (numberUnits: number, teamNumber: 1 | 2) => {
   let team: Array<GameUnit> = [];
   for (let i = 0; i < numberUnits; i++) {
-    let xPosition: number = i % 3;
-    let yPosition: number = Math.floor(i / 3) + (teamNumber * 2 - 2);
+    let xPosition: number = (i % 3) + 2;
+    let yPosition: number = Math.floor(i / 3) + (teamNumber * 2 - 2) + 2;
     let id = (teamNumber - 1) * numberUnits + i;
     switch (Math.floor(Math.random() * 9)) {
       case 0:
@@ -35,7 +35,7 @@ const generateTeam = (numberUnits: number, teamNumber: 1 | 2) => {
         team.push(Monk({xPosition, yPosition, id, team: teamNumber}));
         break;
       case 6:
-        team.push(Sirena({xPosition, yPosition, id, team: teamNumber}));
+        team.push(Siren({xPosition, yPosition, id, team: teamNumber}));
         break;
       case 7:
         team.push(Skeleton({xPosition, yPosition, id, team: teamNumber}));

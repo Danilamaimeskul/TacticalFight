@@ -2,18 +2,18 @@ import {Paralyzer} from '../../strategy/Strategies';
 import GameUnit from '../gameUnit';
 import {GameUnitPropsType} from './GameUnitPropsType';
 
-const Sirena = (props: GameUnitPropsType): GameUnit => {
+const Siren = (props: GameUnitPropsType): GameUnit => {
   return new GameUnit(
     props.xPosition,
     props.yPosition,
     props.id,
     props.team,
-    'Sirena',
+    'Siren',
     130,
     20,
-    require('../../assets/gameUnitsImages/Sirena.png'),
+    require('../../assets/gameUnitsImages/Siren.png'),
     new Paralyzer(),
   );
 };
 
-export default Sirena;
+export default Siren;
