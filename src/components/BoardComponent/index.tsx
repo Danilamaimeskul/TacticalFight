@@ -1,5 +1,8 @@
 import React, {useRef} from 'react';
 import {View, Text, TouchableWithoutFeedback} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import GameUnit from '../../gameUnits/gameUnit';
+import {currentUnitIndexChange} from '../../redux/actions/gameActions';
 import styles from './style';
 import style from './style';
 
@@ -21,17 +24,38 @@ const Board: React.FC<Props> = ({children}) => {
     BoardCells.push(row);
   }
 
+  const currentIndex = useSelector(
+    ({gameReducer}) => gameReducer.currentUnitIndex,
+  );
+
+  const unit: GameUnit = useSelector(
+    ({gameReducer}) => gameReducer.orderedUnits[currentIndex],
+  );
+
+  const dispatch = useDispatch();
+
+  const isInRange = (x: number, y: number): boolean => {
+    return (
+      Math.abs(x - unit?.xPosition) <= 1 && Math.abs(y - unit?.yPosition) <= 1
+    );
+  };
+
   return (
     <View style={styles.board}>
-      {BoardCells.map((item, index) => {
+      {BoardCells.map((item, y) => {
         return (
-          <View style={styles.row} key={index}>
-            {item.map((innerItem, innerIndex) => {
+          <View style={styles.row} key={y}>
+            {item.map((innerItem, x) => {
               return (
                 <TouchableWithoutFeedback
-                  key={innerIndex}
+                  key={x}
                   onPress={() => {
-                    console.log(`x: ${innerIndex}, y: ${index}`);
+                    console.log(`x: ${x}, y: ${y}`);
+                    if (isInRange(x, y)) {
+                      unit.xPosition = x;
+                      unit.yPosition = y;
+                      dispatch(currentUnitIndexChange((currentIndex + 1) % 12));
+                    }
                   }}>
                   <View
                     style={[
@@ -39,10 +63,7 @@ const Board: React.FC<Props> = ({children}) => {
                       {
                         backgroundColor: innerItem,
                       },
-                    ]}>
-                    {/* <Text>X: {innerIndex}</Text>
-                    <Text>Y: {index}</Text> */}
-                  </View>
+                    ]}></View>
                 </TouchableWithoutFeedback>
               );
             })}

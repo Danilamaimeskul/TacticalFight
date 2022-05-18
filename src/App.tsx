@@ -61,9 +61,9 @@ const App = () => {
           return <Unit unit={item} key={index} id={index} />;
         })}
       </Board>
-      <ScrollView horizontal style={{height: 120}}>
+      <ScrollView horizontal style={{height: 120, marginHorizontal: 10}}>
         {currentUnits?.map((item, index) => {
-          return <UnitCard index={index} unit={item} key={index} />;
+          return <UnitCard index={index} unit={item} key={item.id} />;
         })}
       </ScrollView>
     </SafeAreaView>
