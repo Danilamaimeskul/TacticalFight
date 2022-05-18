@@ -1,5 +1,5 @@
 import {Range} from '../../strategy/Strategies';
-import GameUnit from '../gameUnit';
+import GameUnit, {UNIT_NAMES} from '../gameUnit';
 import {GameUnitPropsType} from './GameUnitPropsType';
 
 const ElfArcher = (props: GameUnitPropsType): GameUnit => {
@@ -8,10 +8,9 @@ const ElfArcher = (props: GameUnitPropsType): GameUnit => {
     props.yPosition,
     props.id,
     props.team,
-    'ElfArcher',
+    UNIT_NAMES.ELF_ARCHER,
     90,
     60,
-    require('../../assets/gameUnitsImages/ElfArcher.png'),
     new Range(),
     45,
   );

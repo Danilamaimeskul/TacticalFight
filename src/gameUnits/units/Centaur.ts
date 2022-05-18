@@ -1,5 +1,5 @@
 import {Melee} from '../../strategy/Strategies';
-import GameUnit from '../gameUnit';
+import GameUnit, {UNIT_NAMES} from '../gameUnit';
 import {GameUnitPropsType} from './GameUnitPropsType';
 
 const Centaur = (props: GameUnitPropsType): GameUnit => {
@@ -8,10 +8,9 @@ const Centaur = (props: GameUnitPropsType): GameUnit => {
     props.yPosition,
     props.id,
     props.team,
-    'Centaur',
+    UNIT_NAMES.CENTAUR,
     150,
     50,
-    require('../../assets/gameUnitsImages/Centaur.png'),
     new Melee(),
     50,
   );

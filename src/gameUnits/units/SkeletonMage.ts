@@ -1,5 +1,5 @@
 import {Mage} from '../../strategy/Strategies';
-import GameUnit from '../gameUnit';
+import GameUnit, {UNIT_NAMES} from '../gameUnit';
 import {GameUnitPropsType} from './GameUnitPropsType';
 
 const SkeletonMage = (props: GameUnitPropsType): GameUnit => {
@@ -8,10 +8,9 @@ const SkeletonMage = (props: GameUnitPropsType): GameUnit => {
     props.yPosition,
     props.id,
     props.team,
-    'SkeletonMage',
+    UNIT_NAMES.SKELETON_MAGE,
     50,
     40,
-    require('../../assets/gameUnitsImages/SkeletonMage.png'),
     new Mage(),
     20,
   );

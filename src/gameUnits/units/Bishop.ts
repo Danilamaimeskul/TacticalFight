@@ -1,5 +1,5 @@
 import {MassHeal} from '../../strategy/Strategies';
-import GameUnit from '../gameUnit';
+import GameUnit, {UNIT_NAMES} from '../gameUnit';
 import {GameUnitPropsType} from './GameUnitPropsType';
 
 const Bishop = (props: GameUnitPropsType): GameUnit => {
@@ -8,10 +8,9 @@ const Bishop = (props: GameUnitPropsType): GameUnit => {
     props.yPosition,
     props.id,
     props.team,
-    'Bishop',
+    UNIT_NAMES.BISHOP,
     130,
     20,
-    require('../../assets/gameUnitsImages/Bishop.png'),
     new MassHeal(),
     undefined,
     25,

@@ -1,5 +1,5 @@
 import {Melee} from '../../strategy/Strategies';
-import GameUnit from '../gameUnit';
+import GameUnit, {UNIT_NAMES} from '../gameUnit';
 import {GameUnitPropsType} from './GameUnitPropsType';
 
 const Skeleton = (props: GameUnitPropsType): GameUnit => {
@@ -8,10 +8,9 @@ const Skeleton = (props: GameUnitPropsType): GameUnit => {
     props.yPosition,
     props.id,
     props.team,
-    'Skeleton',
+    UNIT_NAMES.SKELETON,
     100,
     50,
-    require('../../assets/gameUnitsImages/Skeleton.png'),
     new Melee(),
     25,
   );

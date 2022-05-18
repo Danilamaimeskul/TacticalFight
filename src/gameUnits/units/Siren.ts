@@ -1,5 +1,5 @@
 import {Paralyzer} from '../../strategy/Strategies';
-import GameUnit from '../gameUnit';
+import GameUnit, {UNIT_NAMES} from '../gameUnit';
 import {GameUnitPropsType} from './GameUnitPropsType';
 
 const Siren = (props: GameUnitPropsType): GameUnit => {
@@ -8,10 +8,9 @@ const Siren = (props: GameUnitPropsType): GameUnit => {
     props.yPosition,
     props.id,
     props.team,
-    'Siren',
+    UNIT_NAMES.SIREN,
     130,
     20,
-    require('../../assets/gameUnitsImages/Siren.png'),
     new Paralyzer(),
   );
 };

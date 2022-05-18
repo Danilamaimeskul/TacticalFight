@@ -1,5 +1,5 @@
 import {Melee} from '../../strategy/Strategies';
-import GameUnit from '../gameUnit';
+import GameUnit, {UNIT_NAMES} from '../gameUnit';
 import {GameUnitPropsType} from './GameUnitPropsType';
 
 const Bandit = (props: GameUnitPropsType): GameUnit => {
@@ -8,10 +8,9 @@ const Bandit = (props: GameUnitPropsType): GameUnit => {
     props.yPosition,
     props.id,
     props.team,
-    'Bandit',
+    UNIT_NAMES.BANDIT,
     75,
     60,
-    require('../../assets/gameUnitsImages/Bandit.png'),
     new Melee(),
     30,
   );

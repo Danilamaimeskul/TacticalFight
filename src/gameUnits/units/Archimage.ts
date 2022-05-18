@@ -1,5 +1,5 @@
 import {Mage} from '../../strategy/Strategies';
-import GameUnit from '../gameUnit';
+import GameUnit, {UNIT_NAMES} from '../gameUnit';
 import {GameUnitPropsType} from './GameUnitPropsType';
 
 const Archimage = (props: GameUnitPropsType): GameUnit => {
@@ -8,10 +8,9 @@ const Archimage = (props: GameUnitPropsType): GameUnit => {
     props.yPosition,
     props.id,
     props.team,
-    'Archimage',
+    UNIT_NAMES.ARCHIMAGE,
     90,
     30,
-    require('../../assets/gameUnitsImages/Archimage.png'),
     new Mage(),
     20,
   );

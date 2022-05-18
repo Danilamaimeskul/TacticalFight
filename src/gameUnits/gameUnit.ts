@@ -1,5 +1,4 @@
 import {Action} from '../strategy/Action';
-import {Melee} from '../strategy/Strategies';
 
 export const UNIT_NAMES = {
   ARCHIMAGE: 'Archimage',
@@ -22,9 +21,9 @@ class GameUnit {
   maxHP: number;
   hp: number;
   initiative: number;
+  image: NodeRequire;
   isDefend: boolean = false;
   isParalyzed: boolean = false;
-  image: NodeRequire;
   isInRange: boolean = false;
   Action: Action;
   damage?: number;
@@ -37,7 +36,6 @@ class GameUnit {
     unitName: string,
     hp: number,
     initiative: number,
-    image: NodeRequire,
     Action1: Action,
     damage?: number,
     heal?: number,

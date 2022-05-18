@@ -1,5 +1,5 @@
 import {SingleHeal} from '../../strategy/Strategies';
-import GameUnit from '../gameUnit';
+import GameUnit, {UNIT_NAMES} from '../gameUnit';
 import {GameUnitPropsType} from './GameUnitPropsType';
 
 const Monk = (props: GameUnitPropsType): GameUnit => {
@@ -8,10 +8,9 @@ const Monk = (props: GameUnitPropsType): GameUnit => {
     props.yPosition,
     props.id,
     props.team,
-    'Monk',
+    UNIT_NAMES.MONK,
     90,
     20,
-    require('../../assets/gameUnitsImages/Monk.png'),
     new SingleHeal(),
     undefined,
     40,
