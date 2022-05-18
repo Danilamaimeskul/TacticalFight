@@ -56,6 +56,17 @@ class GameUnit {
   doAction(units: GameUnit | GameUnit[]): boolean {
     return this.Action.doAction(units, this);
   }
+  move(x: number, y: number): boolean {
+    if (
+      Math.abs(x - this.xPosition) <= 1 &&
+      Math.abs(y - this.yPosition) <= 1
+    ) {
+      this.xPosition = x;
+      this.yPosition = y;
+      return true;
+    }
+    return false;
+  }
 }
 
 const SetImageLink = (unitName: string): NodeRequire => {

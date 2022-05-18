@@ -63,7 +63,7 @@ const Unit: React.FC<Props> = ({id}) => {
             source={unit.image}
             style={{width: cellSize, height: cellSize}}
           />
-          {/* <Text>{unit.hp}</Text> */}
+          <Text>{unit.team}</Text>
         </View>
       </TouchableWithoutFeedback>
     </View>

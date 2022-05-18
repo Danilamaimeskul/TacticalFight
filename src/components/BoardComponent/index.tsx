@@ -51,9 +51,7 @@ const Board: React.FC<Props> = ({children}) => {
                   key={x}
                   onPress={() => {
                     console.log(`x: ${x}, y: ${y}`);
-                    if (isInRange(x, y)) {
-                      unit.xPosition = x;
-                      unit.yPosition = y;
+                    if (unit.move(x, y)) {
                       dispatch(currentUnitIndexChange((currentIndex + 1) % 12));
                     }
                   }}>
