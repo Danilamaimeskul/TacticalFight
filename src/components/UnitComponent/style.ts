@@ -1,15 +1,10 @@
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
-  // unitName: {
-  //   width: 50,
-  //   height: 50,
-  //   textAlign: 'center',
-  // },
   unit: {
-    position: 'relative',
-    width: 40,
-    // marginHorizontal: 5,
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   image: {
     width: 40,

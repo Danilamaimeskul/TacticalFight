@@ -53,8 +53,8 @@ class GameUnit {
     this.xPosition = xPosition;
     this.yPosition = yPosition;
   }
-  doAction(units: Array<GameUnit>): void {
-    this.Action.doAction(units, this);
+  doAction(units: GameUnit | GameUnit[]): boolean {
+    return this.Action.doAction(units, this);
   }
 }
 

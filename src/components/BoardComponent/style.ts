@@ -11,6 +11,9 @@ const styles = StyleSheet.create({
     position: 'relative',
     marginTop: 25,
   },
+  row: {
+    flexDirection: 'row',
+  },
   cell: {
     width: cellSize,
     height: cellSize,

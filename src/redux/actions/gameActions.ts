@@ -5,11 +5,11 @@ export const currentTeamChange = (teamNumber: 1 | 2) => ({
   type: types.CURRENT_TEAM_CHANGE,
   payload: teamNumber,
 });
-export const currentUnitChange = (unit: GameUnit) => ({
-  type: types.CURRENT_UNIT_CHANGE,
-  payload: unit,
+export const currentUnitIndexChange = (index: number) => ({
+  type: types.CURRENT_UNIT_INDEX_CHANGE,
+  payload: index,
 });
 export const orderedTeamChange = (units: Array<GameUnit>) => ({
-  type: types.ORDER_TEAM_CHANGE,
+  type: types.ORDERED_TEAM_CHANGE,
   payload: units,
 });

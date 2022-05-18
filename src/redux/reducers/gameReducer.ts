@@ -17,15 +17,15 @@ const gameReducer = (
 ) => {
   const {type, payload} = action;
   switch (type) {
-    case types.CURRENT_UNIT_CHANGE:
+    case types.CURRENT_UNIT_INDEX_CHANGE:
       return {
         ...state,
-        currentUnit: payload,
+        currentUnitIndex: payload,
       };
-    case types.ORDER_TEAM_CHANGE:
+    case types.ORDERED_TEAM_CHANGE:
       return {
         ...state,
-        orderedCurrentTeam: payload,
+        orderedUnits: payload,
       };
     default:
       return state;

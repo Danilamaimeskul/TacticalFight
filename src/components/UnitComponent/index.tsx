@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
-import {View, Text, Image, TouchableWithoutFeedback} from 'react-native';
-import {useSelector} from 'react-redux';
+import React from 'react';
+import {View, Image, TouchableWithoutFeedback, Text} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 import GameUnit from '../../gameUnits/gameUnit';
-import teamsReducer from '../../redux/reducers/teamsReducer';
+import {currentUnitIndexChange} from '../../redux/actions/gameActions';
+import {Mage} from '../../strategy/Strategies';
 import {cellSize} from '../BoardComponent/style';
 import styles from './style';
 
@@ -12,32 +13,56 @@ export type Props = {
 };
 
 const Unit: React.FC<Props> = ({id}) => {
-  // Добычу юнита убрать отсюда, юзСелектор
+  const allUnits: GameUnit[] = useSelector(
+    ({teamsReducer}) => teamsReducer.units,
+  );
 
   const unit: GameUnit = useSelector(
     ({teamsReducer}) => teamsReducer.units[id],
   );
+  const currentUnitIndex: number = useSelector(
+    ({gameReducer}) => gameReducer.currentUnitIndex,
+  );
+  const currentUnit: GameUnit = useSelector(
+    ({gameReducer}) => gameReducer.orderedUnits[currentUnitIndex],
+  );
 
-  // Делаем единый стор для обеих команд, добывать сможем через teamReducer.team[id], который мы принимаем с Апп.тсх
+  const dispatch = useDispatch();
 
   return (
     <View
-      style={{
-        position: 'absolute',
-        left: unit.xPosition * cellSize,
-        top: unit.yPosition * cellSize,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
+      style={[
+        styles.unit,
+        {
+          left: unit.xPosition * cellSize,
+          top: unit.yPosition * cellSize,
+          backgroundColor: currentUnit.id === unit.id ? 'green' : null,
+        },
+      ]}>
       <TouchableWithoutFeedback
         onPress={() => {
-          // setBiba(biba + 1);
-          // console.log(biba);
+          // unit.Action.constructor.name позволяет выводить имя класса экшна (Mage, Paralyzer)
+
+          if (
+            currentUnit.Action.constructor.name === 'Mage' ||
+            currentUnit.Action.constructor.name === 'MassHeal'
+          ) {
+            if (currentUnit.doAction(allUnits)) {
+              dispatch(currentUnitIndexChange((currentUnitIndex + 1) % 12));
+            }
+          } else {
+            if (currentUnit.doAction(unit)) {
+              dispatch(currentUnitIndexChange((currentUnitIndex + 1) % 12));
+            }
+          }
         }}>
-        <Image
-          source={unit.image}
-          style={{width: cellSize, height: cellSize, backgroundColor: null}}
-        />
+        <View>
+          <Image
+            source={unit.image}
+            style={{width: cellSize, height: cellSize}}
+          />
+          <Text>{unit.hp}</Text>
+        </View>
       </TouchableWithoutFeedback>
     </View>
   );

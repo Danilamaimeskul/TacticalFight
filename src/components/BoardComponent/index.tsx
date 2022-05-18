@@ -1,5 +1,5 @@
 import React, {useRef} from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, TouchableWithoutFeedback} from 'react-native';
 import styles from './style';
 import style from './style';
 
@@ -25,18 +25,25 @@ const Board: React.FC<Props> = ({children}) => {
     <View style={styles.board}>
       {BoardCells.map((item, index) => {
         return (
-          <View style={{flexDirection: 'row'}} key={index}>
+          <View style={styles.row} key={index}>
             {item.map((innerItem, innerIndex) => {
               return (
-                <View
-                  style={[
-                    styles.cell,
-                    {
-                      backgroundColor: innerItem,
-                    },
-                  ]}
+                <TouchableWithoutFeedback
                   key={innerIndex}
-                />
+                  onPress={() => {
+                    console.log(`x: ${innerIndex}, y: ${index}`);
+                  }}>
+                  <View
+                    style={[
+                      styles.cell,
+                      {
+                        backgroundColor: innerItem,
+                      },
+                    ]}>
+                    {/* <Text>X: {innerIndex}</Text>
+                    <Text>Y: {index}</Text> */}
+                  </View>
+                </TouchableWithoutFeedback>
               );
             })}
           </View>
