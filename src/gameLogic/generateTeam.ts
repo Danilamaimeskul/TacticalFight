@@ -1,6 +1,6 @@
 import GameUnit, {UNIT_NAMES} from '../gameUnits/gameUnit';
 import UnitFactory from '../gameUnits/UnitFactory';
-import {GameUnitPropsType} from '../gameUnits/units/GameUnitPropsType';
+import {GameUnitPropsType} from '../gameUnits/GameUnitPropsType';
 
 const generateTeam = (numberUnits: number, teamNumber: 1 | 2) => {
   let team: Array<GameUnit> = [];

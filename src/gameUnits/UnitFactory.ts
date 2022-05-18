@@ -8,7 +8,7 @@ import {
 } from '../strategy/Strategies';
 import GameUnit, {UNIT_NAMES} from './gameUnit';
 
-import {GameUnitPropsType} from './units/GameUnitPropsType';
+import {GameUnitPropsType} from './GameUnitPropsType';
 
 class UnitFactory {
   public static create(unitName: string, props: GameUnitPropsType): GameUnit {
