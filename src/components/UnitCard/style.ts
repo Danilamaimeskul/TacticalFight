@@ -2,6 +2,8 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   card: {
+    marginTop: 25,
+    height: 90,
     position: 'relative',
     alignItems: 'center',
     borderColor: 'black',
@@ -9,7 +11,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 60,
-    height: 170,
+    height: 65,
   },
   damaged: {
     position: 'absolute',

@@ -9,7 +9,6 @@ export class Mage implements Action {
     }
     units.forEach(unit => {
       if (unit.team !== currentUnit.team) {
-        console.log(unit.isDefend);
         unit.hp -= unit.isDefend ? currentUnit.damage / 2 : currentUnit.damage;
       }
     });

@@ -3,6 +3,7 @@ import {View, Image, TouchableWithoutFeedback, Text} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import GameUnit from '../../gameUnits/gameUnit';
 import {currentUnitIndexChange} from '../../redux/actions/gameActions';
+import {ChangeAllUnits} from '../../redux/actions/teamsActions';
 import {Mage} from '../../strategy/Strategies';
 import {cellSize} from '../BoardComponent/style';
 import styles from './style';
@@ -49,6 +50,7 @@ const Unit: React.FC<Props> = ({id}) => {
           ) {
             if (currentUnit.doAction(allUnits)) {
               dispatch(currentUnitIndexChange((currentUnitIndex + 1) % 12));
+              dispatch(ChangeAllUnits(allUnits));
             }
           } else {
             if (currentUnit.doAction(unit)) {
@@ -61,7 +63,7 @@ const Unit: React.FC<Props> = ({id}) => {
             source={unit.image}
             style={{width: cellSize, height: cellSize}}
           />
-          <Text>{unit.hp}</Text>
+          {/* <Text>{unit.hp}</Text> */}
         </View>
       </TouchableWithoutFeedback>
     </View>
