@@ -2,30 +2,23 @@ import GameUnit from '../../gameUnits/gameUnit';
 import types from '../types';
 
 export type teamState = {
-  team1: Array<GameUnit>;
-  team2: Array<GameUnit>;
+  units: Array<GameUnit>;
 };
 
 const initialState: teamState = {
-  team1: [],
-  team2: [],
+  units: [],
 };
 
 const teamsReducer = (
   state = initialState,
-  action: {type: string; payload: 1 | 2 | Array<GameUnit> | null},
+  action: {type: string; payload: GameUnit | null},
 ) => {
   const {type, payload} = action;
   switch (type) {
-    case types.TEAM_1_UNITS_CHANGE:
+    case types.UNITS_CHANGE:
       return {
         ...state,
-        team1: payload,
-      };
-    case types.TEAM_2_UNITS_CHANGE:
-      return {
-        ...state,
-        team2: payload,
+        units: payload,
       };
     default:
       return state;

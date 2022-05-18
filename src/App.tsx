@@ -7,34 +7,38 @@
  *
  * @format
  */
-import React from 'react';
-import {
-  SafeAreaView,
-  StatusBar,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {SafeAreaView, StatusBar, useColorScheme} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {useDispatch} from 'react-redux';
 import Board from './components/BoardComponent';
 import Unit from './components/UnitComponent';
 import generateTeam from './gameLogic/generateTeam';
+import GameUnit from './gameUnits/gameUnit';
+import {unitsChange} from './redux/actions/teamsActions';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
+
+  const [units, setUnits] = useState<GameUnit[]>([]);
+  const dispatch = useDispatch();
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  let team = [...generateTeam(6, 1), ...generateTeam(6, 2)];
+  useEffect(() => {
+    const createdUnits = [...generateTeam(6, 1), ...generateTeam(6, 2)];
+    setUnits(createdUnits);
+    dispatch(unitsChange(createdUnits));
+  }, []);
 
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <Board>
-        {team.map((item, index) => {
-          return <Unit team={1} unit={item} key={index} id={index} />;
+        {units.map((item, index) => {
+          return <Unit unit={item} key={index} id={index} />;
         })}
       </Board>
     </SafeAreaView>
