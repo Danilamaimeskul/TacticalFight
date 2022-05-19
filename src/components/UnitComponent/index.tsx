@@ -86,7 +86,12 @@ const Unit: React.FC<Props> = ({id}) => {
             </View>
           </TouchableWithoutFeedback>
         </>
-      ) : null}
+      ) : (
+        <Image
+          source={require('../../assets/gameUnitsImages/Grave.png')}
+          style={{width: cellSize, height: cellSize}}
+        />
+      )}
     </View>
   );
 };
