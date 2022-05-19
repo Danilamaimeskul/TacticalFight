@@ -19,6 +19,8 @@ import {
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {useDispatch, useSelector} from 'react-redux';
 import Board from './components/BoardComponent';
+import ChosenUnitStatistic from './components/ChosenUnitStatistic';
+import CurrentUnitStatistic from './components/CurrentUnitStatistic';
 import GameStatus from './components/GameStatus';
 import UnitCard from './components/UnitCard';
 import Unit from './components/UnitComponent';
@@ -68,6 +70,10 @@ const App = () => {
           return <UnitCard index={index} unit={item} key={item.id} />;
         })}
       </ScrollView>
+      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        <CurrentUnitStatistic />
+        <ChosenUnitStatistic />
+      </View>
     </SafeAreaView>
   );
 };

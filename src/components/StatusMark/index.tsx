@@ -6,12 +6,16 @@ interface StatusMarkProps {
   team: 1 | 2;
   canAttack: boolean;
   isCurrent: boolean;
+  isChosen: boolean;
 }
 
 const StatusMark = (props: StatusMarkProps) => {
-  const {team, canAttack, isCurrent} = props;
+  const {team, canAttack, isCurrent, isChosen} = props;
   if (isCurrent) {
     return <View style={[styles.container, {backgroundColor: 'green'}]} />;
+  }
+  if (isChosen) {
+    return <View style={[styles.container, {backgroundColor: 'purple'}]} />;
   }
   if (canAttack) {
     return <View style={[styles.container, {backgroundColor: 'red'}]} />;

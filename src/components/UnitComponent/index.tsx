@@ -29,6 +29,14 @@ const Unit: React.FC<Props> = ({id}) => {
     ({gameReducer}) => gameReducer.orderedUnits[currentUnitIndex],
   );
 
+  const chosenUnitIndex: number = useSelector(
+    ({gameReducer}) => gameReducer.chosenUnitIndex,
+  );
+
+  const chosenUnit: GameUnit = useSelector(
+    ({gameReducer}) => gameReducer.orderedUnits[chosenUnitIndex],
+  );
+
   useEffect(() => {
     if (currentUnit.hp <= 0)
       dispatch(currentUnitIndexChange((currentUnitIndex + 1) % 12));
@@ -67,6 +75,7 @@ const Unit: React.FC<Props> = ({id}) => {
             team={unit.team}
             canAttack={unit.canActed(currentUnit)}
             isCurrent={currentUnit.id === unit.id}
+            isChosen={chosenUnit?.id === unit.id}
           />
           <TouchableWithoutFeedback onPress={handlePress}>
             <View>

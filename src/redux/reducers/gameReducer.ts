@@ -3,11 +3,13 @@ import types from '../types';
 
 export type gameState = {
   currentUnitIndex: number | null;
+  chosenUnitIndex: number | null;
   orderedUnits: Array<GameUnit>;
 };
 
 const initialState: gameState = {
   currentUnitIndex: null,
+  chosenUnitIndex: null,
   orderedUnits: [],
 };
 
@@ -21,6 +23,11 @@ const gameReducer = (
       return {
         ...state,
         currentUnitIndex: payload,
+      };
+    case types.CHOSEN_UNIT_INDEX_CHANGE:
+      return {
+        ...state,
+        chosenUnitIndex: payload,
       };
     case types.ORDERED_TEAM_CHANGE:
       return {

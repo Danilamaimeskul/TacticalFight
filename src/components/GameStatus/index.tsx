@@ -34,7 +34,9 @@ const GameStatus = () => {
         <Text>Team 1 HP: {team1Hp}</Text>
         <Text>Team 2 HP: {team2Hp}</Text>
       </View>
-      <Text>Team: {units[currentIndex]?.team}</Text>
+      <View>
+        <Text>Current Team: {units[currentIndex]?.team}</Text>
+      </View>
     </View>
   );
 };
