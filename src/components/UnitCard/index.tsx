@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import GameUnit from '../../gameunit/gameUnit';
+import GameUnit from '../../gameUnits/gameUnit';
 import {chosenUnitIndexChange} from '../../redux/actions/gameActions';
 import styles from './style';
 

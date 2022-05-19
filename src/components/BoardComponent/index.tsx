@@ -60,7 +60,9 @@ const Board: React.FC<Props> = ({children}) => {
                       {
                         backgroundColor: innerItem,
                       },
-                    ]}></View>
+                    ]}>
+                    {isInRange(x, y) && <View style={styles.circle} />}
+                  </View>
                 </TouchableWithoutFeedback>
               );
             })}

@@ -15,8 +15,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   cell: {
+    justifyContent: 'center',
+    alignItems: 'center',
     width: cellSize,
     height: cellSize,
+  },
+  circle: {
+    width: 15,
+    height: 15,
+    borderRadius: 15 / 2,
+    backgroundColor: 'gray',
   },
 });
 
