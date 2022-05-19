@@ -47,9 +47,16 @@ const Unit: React.FC<Props> = ({id}) => {
       currentUnit.Action.constructor.name === 'Mage' ||
       currentUnit.Action.constructor.name === 'MassHeal'
     ) {
-      if (currentUnit.doAction(allUnits)) {
-        dispatch(currentUnitIndexChange((currentUnitIndex + 1) % 12));
-        dispatch(ChangeAllUnits(allUnits));
+      if (unit.id === currentUnit.id) {
+        if (currentUnit.doAction([currentUnit, ...allUnits])) {
+          dispatch(currentUnitIndexChange((currentUnitIndex + 1) % 12));
+          dispatch(ChangeAllUnits(allUnits));
+        }
+      } else {
+        if (currentUnit.doAction(allUnits)) {
+          dispatch(currentUnitIndexChange((currentUnitIndex + 1) % 12));
+          dispatch(ChangeAllUnits(allUnits));
+        }
       }
     } else {
       if (currentUnit.doAction(unit)) {
@@ -81,8 +88,20 @@ const Unit: React.FC<Props> = ({id}) => {
             <View>
               <Image
                 source={unit.image}
-                style={{width: cellSize, height: cellSize}}
+                style={[
+                  {
+                    width: cellSize,
+                    height: cellSize,
+                  },
+                  unit.isParalyzed && {tintColor: 'lightgreen'},
+                ]}
               />
+              {unit.isDefend && (
+                <Image
+                  style={styles.shield}
+                  source={require('../../assets/Shield.png')}
+                />
+              )}
             </View>
           </TouchableWithoutFeedback>
         </>

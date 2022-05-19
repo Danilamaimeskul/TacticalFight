@@ -24,7 +24,7 @@ const ChosenUnitStatistic = () => {
       {chosenIndex !== null && (
         <TouchableOpacity onPress={closeStatistic}>
           <View>
-            <Text>Name: {chosenUnit?.unitName}</Text>
+            <Text>{chosenUnit?.unitName}</Text>
             <Text>Class: {chosenUnit?.Action.constructor.name}</Text>
             {chosenUnit?.damage && <Text>Damage: {chosenUnit?.damage}</Text>}
             {chosenUnit?.heal && <Text>Heal: {chosenUnit?.heal}</Text>}

@@ -12,14 +12,14 @@ const styles = StyleSheet.create({
   },
   shield: {
     position: 'absolute',
-    height: 30,
-    width: 25,
+    height: 25,
+    width: 20,
   },
   paralyzed: {
     position: 'absolute',
-    left: 24,
     height: 40,
     width: 30,
+    zIndex: 10,
     tintColor: 'white',
   },
 });

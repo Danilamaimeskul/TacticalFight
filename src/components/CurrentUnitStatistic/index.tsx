@@ -16,7 +16,7 @@ const CurrentUnitStatistic = () => {
   return (
     <View style={styles.statusBlock}>
       <View>
-        <Text>Name: {currentUnit?.unitName}</Text>
+        <Text>{currentUnit?.unitName}</Text>
         <Text>Class: {currentUnit?.Action.constructor.name}</Text>
         {currentUnit?.damage && <Text>Damage: {currentUnit?.damage}</Text>}
         {currentUnit?.heal && <Text>Heal: {currentUnit?.heal}</Text>}

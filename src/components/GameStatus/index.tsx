@@ -1,10 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import {Text, View, TouchableOpacity, Image} from 'react-native';
 import {useSelector} from 'react-redux';
 import GameUnit from '../../gameUnits/gameUnit';
 import styles from './style';
 
-const GameStatus = () => {
+interface GameStatusProps {
+  restart: () => void;
+}
+
+const GameStatus = (props: GameStatusProps) => {
   const [team1Hp, setTeam1Hp] = useState(0);
   const [team2Hp, setTeam2Hp] = useState(0);
 
@@ -26,16 +30,22 @@ const GameStatus = () => {
     setTeam2Hp(team2);
   };
 
-  useEffect(countTeamsHP, [currentIndex]);
+  useEffect(countTeamsHP, [units]);
 
   return (
     <View style={styles.statusBlock}>
       <View>
         <Text>Team 1 HP: {team1Hp}</Text>
         <Text>Team 2 HP: {team2Hp}</Text>
-      </View>
-      <View>
         <Text>Current Team: {units[currentIndex]?.team}</Text>
+      </View>
+      <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <TouchableOpacity onPress={props.restart}>
+          <Image source={require('../../assets/Refresh.png')} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => console.log('home')}>
+          <Image source={require('../../assets/Home.png')} />
+        </TouchableOpacity>
       </View>
     </View>
   );

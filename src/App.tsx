@@ -15,6 +15,7 @@ import {
   View,
   Text,
   ScrollView,
+  TouchableOpacity,
 } from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {useDispatch, useSelector} from 'react-redux';
@@ -47,19 +48,25 @@ const App = () => {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  useEffect(() => {
+  const restart = (): void => {
+    dispatch(ChangeAllUnits([]));
+    dispatch(orderedTeamChange([]));
     const createdUnits = [...generateTeam(6, 1), ...generateTeam(6, 2)];
     setUnits(createdUnits);
     dispatch(ChangeAllUnits(createdUnits));
     const orderedUnits = orderedCurrentTeam(createdUnits);
     dispatch(orderedTeamChange(orderedUnits));
     dispatch(currentUnitIndexChange(0));
+  };
+
+  useEffect(() => {
+    restart();
   }, []);
 
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <GameStatus />
+      <GameStatus restart={restart} />
       <Board>
         {units?.map((item, index) => {
           return <Unit unit={item} key={index} id={index} />;

@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     width: boardWidth,
     marginHorizontal: 20,
     position: 'relative',
-    marginTop: 25,
+    marginTop: 10,
   },
   row: {
     flexDirection: 'row',

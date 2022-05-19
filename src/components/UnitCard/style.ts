@@ -2,7 +2,9 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   card: {
-    marginTop: 25,
+    marginTop: 26,
+    marginHorizontal: 2,
+    borderRadius: 5,
     height: 90,
     position: 'relative',
     alignItems: 'center',
