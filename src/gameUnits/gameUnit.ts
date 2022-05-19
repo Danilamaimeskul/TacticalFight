@@ -67,6 +67,28 @@ class GameUnit {
     }
     return false;
   }
+  canActed(currentUnit: GameUnit): boolean {
+    switch (currentUnit.Action.constructor.name) {
+      case 'Mage':
+        return this.team !== currentUnit.team;
+      case 'Range':
+        return this.team !== currentUnit.team;
+      case 'Paralyzer':
+        return this.team !== currentUnit.team;
+      case 'Melee':
+        return (
+          Math.abs(this.xPosition - currentUnit.xPosition) <= 1 &&
+          Math.abs(this.yPosition - currentUnit.yPosition) <= 1 &&
+          this.team !== currentUnit.team
+        );
+      case 'SingleHeal':
+        return this.team === currentUnit.team;
+      case 'MassHeal':
+        return this.team === currentUnit.team;
+    }
+
+    return false;
+  }
 }
 
 const SetImageLink = (unitName: string): NodeRequire => {

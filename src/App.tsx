@@ -19,6 +19,7 @@ import {
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {useDispatch, useSelector} from 'react-redux';
 import Board from './components/BoardComponent';
+import GameStatus from './components/GameStatus';
 import UnitCard from './components/UnitCard';
 import Unit from './components/UnitComponent';
 import generateTeam from './gameLogic/generateTeam';
@@ -56,6 +57,7 @@ const App = () => {
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      <GameStatus />
       <Board>
         {units?.map((item, index) => {
           return <Unit unit={item} key={index} id={index} />;

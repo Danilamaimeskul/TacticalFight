@@ -4,7 +4,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import GameUnit from '../../gameUnits/gameUnit';
 import {currentUnitIndexChange} from '../../redux/actions/gameActions';
 import styles from './style';
-import style from './style';
 
 type Props = {
   children?: React.ReactNode;
@@ -16,7 +15,7 @@ const Board: React.FC<Props> = ({children}) => {
     const row: string[] = [];
     for (let j = 0; j < 7; j++) {
       if ((i + j) % 2 !== 0) {
-        row.push('red');
+        row.push('#eeeed2');
       } else {
         row.push('white');
       }

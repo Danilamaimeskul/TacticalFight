@@ -8,8 +8,9 @@ export class Mage implements Action {
       return true;
     }
     units.forEach(unit => {
-      if (unit.team !== currentUnit.team) {
+      if (unit.team !== currentUnit.team && unit.hp > 0) {
         unit.hp -= unit.isDefend ? currentUnit.damage / 2 : currentUnit.damage;
+        unit.hp < 0 ? (unit.hp = 0) : null;
       }
     });
     return true;
@@ -25,9 +26,11 @@ export class Melee implements Action {
     if (
       Math.abs(unit.xPosition - currentUnit.xPosition) <= 1 &&
       Math.abs(unit.yPosition - currentUnit.yPosition) <= 1 &&
-      unit.team !== currentUnit.team
+      unit.team !== currentUnit.team &&
+      unit.hp > 0
     ) {
       unit.hp -= unit.isDefend ? currentUnit.damage / 2 : currentUnit.damage;
+      unit.hp < 0 ? (unit.hp = 0) : null;
       return true;
     }
     return false;
@@ -40,8 +43,9 @@ export class Range implements Action {
       unit.isDefend = true;
       return true;
     }
-    if (unit.team !== currentUnit.team) {
+    if (unit.team !== currentUnit.team && unit.hp > 0) {
       unit.hp -= unit.isDefend ? currentUnit.damage / 2 : currentUnit.damage;
+      unit.hp < 0 ? (unit.hp = 0) : null;
       return true;
     }
     return false;
@@ -54,7 +58,7 @@ export class SingleHeal implements Action {
       unit.isDefend = true;
       return true;
     }
-    if (unit.team === currentUnit.team) {
+    if (unit.team === currentUnit.team && unit.hp > 0) {
       unit.hp += currentUnit.heal;
       return true;
     }
@@ -69,7 +73,7 @@ export class MassHeal implements Action {
       return true;
     }
     units.forEach(unit => {
-      if (unit.team === currentUnit.team) {
+      if (unit.team === currentUnit.team && unit.hp > 0) {
         unit.hp += currentUnit.heal;
       }
     });
@@ -79,7 +83,7 @@ export class MassHeal implements Action {
 
 export class Paralyzer implements Action {
   doAction(unit: GameUnit, currentUnit: GameUnit): boolean {
-    if (unit.id === currentUnit.id) {
+    if (unit.id === currentUnit.id && unit.hp > 0) {
       unit.isDefend = true;
       return true;
     }
