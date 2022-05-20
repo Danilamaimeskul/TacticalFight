@@ -6,6 +6,7 @@ import styles from './style';
 
 interface GameStatusProps {
   restart: () => void;
+  navigation: any;
 }
 
 const GameStatus = (props: GameStatusProps) => {
@@ -47,7 +48,7 @@ const GameStatus = (props: GameStatusProps) => {
         <TouchableOpacity onPress={props.restart}>
           <Image source={require('../../assets/Refresh.png')} />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => console.log('home')}>
+        <TouchableOpacity onPress={() => props.navigation.navigate('MainMenu')}>
           <Image source={require('../../assets/Home.png')} />
         </TouchableOpacity>
       </View>
