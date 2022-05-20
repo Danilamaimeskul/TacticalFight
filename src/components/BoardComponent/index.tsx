@@ -43,36 +43,40 @@ const Board: React.FC<Props> = ({children}) => {
   };
 
   return (
-    <View style={styles.board}>
-      {BoardCells.map((item, y) => {
-        return (
-          <View style={styles.row} key={y}>
-            {item.map((innerItem, x) => {
-              return (
-                <TouchableWithoutFeedback
-                  key={x}
-                  onPress={() => {
-                    if (unit.move(x, y)) {
-                      dispatch(currentUnitIndexChange((currentIndex + 1) % 12));
-                      dispatch(nextGameTick());
-                    }
-                  }}>
-                  <View
-                    style={[
-                      styles.cell,
-                      {
-                        backgroundColor: innerItem,
-                      },
-                    ]}>
-                    {isInRange(x, y) && <View style={styles.circle} />}
-                  </View>
-                </TouchableWithoutFeedback>
-              );
-            })}
-          </View>
-        );
-      })}
-      {children}
+    <View style={{alignItems: 'center'}}>
+      <View style={styles.board}>
+        {BoardCells.map((item, y) => {
+          return (
+            <View style={styles.row} key={y}>
+              {item.map((innerItem, x) => {
+                return (
+                  <TouchableWithoutFeedback
+                    key={x}
+                    onPress={() => {
+                      if (unit.move(x, y)) {
+                        dispatch(
+                          currentUnitIndexChange((currentIndex + 1) % 12),
+                        );
+                        dispatch(nextGameTick());
+                      }
+                    }}>
+                    <View
+                      style={[
+                        styles.cell,
+                        {
+                          backgroundColor: innerItem,
+                        },
+                      ]}>
+                      {isInRange(x, y) && <View style={styles.circle} />}
+                    </View>
+                  </TouchableWithoutFeedback>
+                );
+              })}
+            </View>
+          );
+        })}
+        {children}
+      </View>
     </View>
   );
 };

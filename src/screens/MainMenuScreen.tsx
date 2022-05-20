@@ -21,6 +21,7 @@ import generateTeam from '../gameLogic/generateTeam';
 import orderedCurrentTeam from '../gameLogic/orderedCurrentTeam';
 import GameUnit from '../gameUnits/gameUnit';
 import {
+  chosenUnitIndexChange,
   currentUnitIndexChange,
   orderedTeamChange,
   restartGameTick,
@@ -51,6 +52,7 @@ const MainMenuScreen = ({navigation}) => {
     dispatch(orderedTeamChange(orderedUnits));
     dispatch(currentUnitIndexChange(0));
     dispatch(restartGameTick());
+    dispatch(chosenUnitIndexChange(null));
   };
 
   useEffect(() => {

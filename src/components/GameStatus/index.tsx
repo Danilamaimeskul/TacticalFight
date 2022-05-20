@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Text, View, TouchableOpacity, Image} from 'react-native';
+import {Text, View, TouchableOpacity, Image, Alert} from 'react-native';
 import {useSelector} from 'react-redux';
 import GameUnit from '../../gameUnits/gameUnit';
 import styles from './style';
@@ -33,7 +33,29 @@ const GameStatus = (props: GameStatusProps) => {
     setTeam2Hp(team2);
   };
 
-  useEffect(countTeamsHP, [currentIndex]);
+  const handleAlert = (winTeam: 1 | 2) => {
+    Alert.alert(`Team ${winTeam} Win!!!`, '', [
+      {
+        text: 'Cancel',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      {
+        text: 'Go to Main Menu',
+        onPress: () => props.navigation.navigate('MainMenu'),
+      },
+    ]);
+  };
+
+  useEffect(() => {
+    countTeamsHP();
+    if (team1Hp <= 0 && gameTick) {
+      handleAlert(2);
+    }
+    if (team2Hp <= 0 && gameTick) {
+      handleAlert(1);
+    }
+  }, [units, gameTick]);
 
   return (
     <View style={styles.statusBlock}>

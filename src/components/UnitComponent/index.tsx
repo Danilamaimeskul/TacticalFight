@@ -79,11 +79,11 @@ const Unit: React.FC<Props> = ({id}) => {
       style={[
         styles.unit,
         {
-          left: unit.xPosition * cellSize,
-          top: unit.yPosition * cellSize,
+          left: unit?.xPosition * cellSize,
+          top: unit?.yPosition * cellSize,
         },
       ]}>
-      {unit.hp > 0 ? (
+      {unit?.hp > 0 ? (
         <>
           <StatusMark
             team={unit.team}

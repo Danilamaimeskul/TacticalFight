@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
   board: {
     flexWrap: 'wrap',
     width: boardWidth,
-    marginHorizontal: 20,
+    // marginHorizontal: 20,
     position: 'relative',
     marginTop: 10,
   },

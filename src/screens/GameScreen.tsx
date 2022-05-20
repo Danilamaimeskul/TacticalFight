@@ -27,6 +27,7 @@ import generateTeam from '../gameLogic/generateTeam';
 import orderedCurrentTeam from '../gameLogic/orderedCurrentTeam';
 import GameUnit from '../gameUnits/gameUnit';
 import {
+  chosenUnitIndexChange,
   currentUnitIndexChange,
   orderedTeamChange,
   restartGameTick,
@@ -36,16 +37,14 @@ import {ChangeAllUnits} from '../redux/actions/teamsActions';
 const GameScreen = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
 
-  const currentUnits: GameUnit[] = useSelector(
-    ({gameReducer}) => gameReducer.orderedUnits,
-  );
-
-  const [units, setUnits] = useState<GameUnit[]>([]);
-  const dispatch = useDispatch();
-
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+  const currentUnits: GameUnit[] = useSelector(
+    ({gameReducer}) => gameReducer.orderedUnits,
+  );
+  const [units, setUnits] = useState<GameUnit[]>([]);
+  const dispatch = useDispatch();
 
   const restart = (): void => {
     dispatch(ChangeAllUnits([]));
@@ -55,6 +54,7 @@ const GameScreen = ({navigation}) => {
     dispatch(ChangeAllUnits(createdUnits));
     const orderedUnits = orderedCurrentTeam(createdUnits);
     dispatch(orderedTeamChange(orderedUnits));
+    dispatch(chosenUnitIndexChange(null));
     dispatch(currentUnitIndexChange(0));
     dispatch(restartGameTick());
   };
