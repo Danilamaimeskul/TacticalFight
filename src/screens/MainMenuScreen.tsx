@@ -14,6 +14,8 @@ import {
   useColorScheme,
   Text,
   TouchableOpacity,
+  View,
+  StyleSheet,
 } from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {useDispatch, useSelector} from 'react-redux';
@@ -62,15 +64,41 @@ const MainMenuScreen = ({navigation}) => {
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <Text>Best Game Ever Made</Text>
-      <TouchableOpacity onPress={() => navigation.navigate('Game')}>
-        <Text>New Game</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => console.log('continue')}>
-        <Text>Continue</Text>
-      </TouchableOpacity>
+      <View style={styles.menuBlock}>
+        <Text style={styles.gameName}>Best Game Ever Made</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('Game')}>
+          <Text style={styles.button}>New Game</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => console.log('continue')}>
+          <Text style={styles.button}>Continue</Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  menuBlock: {
+    alignItems: 'center',
+    marginTop: 120,
+  },
+  gameName: {
+    fontSize: 30,
+    backgroundColor: 'lightblue',
+    borderRadius: 10,
+    paddingHorizontal: 10,
+  },
+  button: {
+    fontSize: 30,
+    backgroundColor: 'lightblue',
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    marginTop: 50,
+    color: 'white',
+    textDecorationLine: 'underline',
+    borderColor: 'pink',
+    borderWidth: 1,
+  },
+});
 
 export default MainMenuScreen;
