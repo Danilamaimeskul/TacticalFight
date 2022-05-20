@@ -2,9 +2,11 @@ import React, {useEffect} from 'react';
 import {View, Image, TouchableWithoutFeedback, Text} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import GameUnit from '../../gameUnits/gameUnit';
-import {currentUnitIndexChange} from '../../redux/actions/gameActions';
+import {
+  currentUnitIndexChange,
+  nextGameTick,
+} from '../../redux/actions/gameActions';
 import {ChangeAllUnits} from '../../redux/actions/teamsActions';
-import {Mage} from '../../strategy/Strategies';
 import {cellSize} from '../BoardComponent/style';
 import StatusMark from '../StatusMark';
 import styles from './style';
@@ -18,6 +20,8 @@ const Unit: React.FC<Props> = ({id}) => {
   const allUnits: GameUnit[] = useSelector(
     ({teamsReducer}) => teamsReducer.units,
   );
+
+  const gameTick: number = useSelector(({gameReducer}) => gameReducer.gameTick);
 
   const unit: GameUnit = useSelector(
     ({teamsReducer}) => teamsReducer.units[id],
@@ -38,29 +42,32 @@ const Unit: React.FC<Props> = ({id}) => {
   );
 
   useEffect(() => {
-    if (currentUnit.hp <= 0)
+    if (currentUnit.hp <= 0) {
       dispatch(currentUnitIndexChange((currentUnitIndex + 1) % 12));
+      dispatch(nextGameTick());
+    }
   }, [currentUnit]);
 
   const handlePress = (): void => {
-    if (
-      currentUnit.Action.constructor.name === 'Mage' ||
-      currentUnit.Action.constructor.name === 'MassHeal'
-    ) {
-      if (unit.id === currentUnit.id) {
-        if (currentUnit.doAction([currentUnit, ...allUnits])) {
+    if (unit.id === currentUnit.id) {
+      unit.setDefended(gameTick);
+      dispatch(currentUnitIndexChange((currentUnitIndex + 1) % 12));
+      dispatch(nextGameTick());
+    } else {
+      if (
+        currentUnit.Action.constructor.name === 'Mage' ||
+        currentUnit.Action.constructor.name === 'MassHeal'
+      ) {
+        if (currentUnit.doAction(allUnits)) {
           dispatch(currentUnitIndexChange((currentUnitIndex + 1) % 12));
+          dispatch(nextGameTick());
           dispatch(ChangeAllUnits(allUnits));
         }
       } else {
-        if (currentUnit.doAction(allUnits)) {
+        if (currentUnit.doAction(unit, gameTick)) {
+          dispatch(nextGameTick());
           dispatch(currentUnitIndexChange((currentUnitIndex + 1) % 12));
-          dispatch(ChangeAllUnits(allUnits));
         }
-      }
-    } else {
-      if (currentUnit.doAction(unit)) {
-        dispatch(currentUnitIndexChange((currentUnitIndex + 1) % 12));
       }
     }
   };

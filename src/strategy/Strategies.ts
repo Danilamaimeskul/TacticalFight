@@ -3,10 +3,6 @@ import GameUnit from '../gameUnits/gameUnit';
 
 export class Mage implements Action {
   doAction(units: GameUnit[], currentUnit: GameUnit): boolean {
-    if (units[0].id === currentUnit.id) {
-      units[0].isDefend = true;
-      return true;
-    }
     units.forEach(unit => {
       if (unit.team !== currentUnit.team && unit.hp > 0) {
         unit.hp -= unit.isDefend ? currentUnit.damage / 2 : currentUnit.damage;
@@ -19,10 +15,6 @@ export class Mage implements Action {
 
 export class Melee implements Action {
   doAction(unit: GameUnit, currentUnit: GameUnit): boolean {
-    if (unit.id === currentUnit.id) {
-      unit.isDefend = true;
-      return true;
-    }
     if (
       Math.abs(unit.xPosition - currentUnit.xPosition) <= 1 &&
       Math.abs(unit.yPosition - currentUnit.yPosition) <= 1 &&
@@ -39,10 +31,6 @@ export class Melee implements Action {
 
 export class Range implements Action {
   doAction(unit: GameUnit, currentUnit: GameUnit): boolean {
-    if (unit.id === currentUnit.id) {
-      unit.isDefend = true;
-      return true;
-    }
     if (unit.team !== currentUnit.team && unit.hp > 0) {
       unit.hp -= unit.isDefend ? currentUnit.damage / 2 : currentUnit.damage;
       unit.hp < 0 ? (unit.hp = 0) : null;
@@ -54,10 +42,6 @@ export class Range implements Action {
 
 export class SingleHeal implements Action {
   doAction(unit: GameUnit, currentUnit: GameUnit): boolean {
-    if (unit.id === currentUnit.id) {
-      unit.isDefend = true;
-      return true;
-    }
     if (unit.team === currentUnit.team && unit.hp > 0) {
       unit.hp += currentUnit.heal;
       return true;
@@ -68,10 +52,6 @@ export class SingleHeal implements Action {
 
 export class MassHeal implements Action {
   doAction(units: GameUnit[], currentUnit: GameUnit): boolean {
-    if (units[0].id === currentUnit.id) {
-      units[0].isDefend = true;
-      return true;
-    }
     units.forEach(unit => {
       if (unit.team === currentUnit.team && unit.hp > 0) {
         unit.hp += currentUnit.heal;
@@ -82,13 +62,9 @@ export class MassHeal implements Action {
 }
 
 export class Paralyzer implements Action {
-  doAction(unit: GameUnit, currentUnit: GameUnit): boolean {
-    if (unit.id === currentUnit.id && unit.hp > 0) {
-      unit.isDefend = true;
-      return true;
-    }
+  doAction(unit: GameUnit, currentUnit: GameUnit, gameTick: number): boolean {
     if (unit.team !== currentUnit.team) {
-      unit.isParalyzed = true;
+      unit.setParalyzed(gameTick);
       return true;
     }
     return false;

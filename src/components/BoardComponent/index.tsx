@@ -2,7 +2,10 @@ import React, {useRef} from 'react';
 import {View, Text, TouchableWithoutFeedback} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import GameUnit from '../../gameUnits/gameUnit';
-import {currentUnitIndexChange} from '../../redux/actions/gameActions';
+import {
+  currentUnitIndexChange,
+  nextGameTick,
+} from '../../redux/actions/gameActions';
 import styles from './style';
 
 type Props = {
@@ -23,7 +26,7 @@ const Board: React.FC<Props> = ({children}) => {
     BoardCells.push(row);
   }
 
-  const currentIndex = useSelector(
+  const currentIndex: number = useSelector(
     ({gameReducer}) => gameReducer.currentUnitIndex,
   );
 
@@ -51,6 +54,7 @@ const Board: React.FC<Props> = ({children}) => {
                   onPress={() => {
                     if (unit.move(x, y)) {
                       dispatch(currentUnitIndexChange((currentIndex + 1) % 12));
+                      dispatch(nextGameTick());
                     }
                   }}>
                   <View

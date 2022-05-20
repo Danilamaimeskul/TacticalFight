@@ -17,3 +17,9 @@ export const orderedTeamChange = (units: Array<GameUnit>) => ({
   type: types.ORDERED_TEAM_CHANGE,
   payload: units,
 });
+export const nextGameTick = () => ({
+  type: types.NEXT_GAME_TICK,
+});
+export const restartGameTick = () => ({
+  type: types.RESTART_GAME_TICK,
+});

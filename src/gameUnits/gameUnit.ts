@@ -23,8 +23,9 @@ class GameUnit {
   initiative: number;
   image: NodeRequire;
   isDefend: boolean = false;
+  defendGameTick: number | null = null;
   isParalyzed: boolean = false;
-  isInRange: boolean = false;
+  paralyzedGameTick: number | null = null;
   Action: Action;
   damage?: number;
   heal?: number;
@@ -53,8 +54,8 @@ class GameUnit {
     this.xPosition = xPosition;
     this.yPosition = yPosition;
   }
-  doAction(units: GameUnit | GameUnit[]): boolean {
-    return this.Action.doAction(units, this);
+  doAction(units: GameUnit | GameUnit[], gameTick?: number): boolean {
+    return this.Action.doAction(units, this, gameTick);
   }
   move(x: number, y: number): boolean {
     if (
@@ -66,6 +67,26 @@ class GameUnit {
       return true;
     }
     return false;
+  }
+  setDefended(gameTick: number): void {
+    this.defendGameTick = gameTick;
+    this.isDefend = true;
+  }
+  setUnDefended(gameTick: number): void {
+    if (gameTick - this.defendGameTick >= 12) {
+      this.defendGameTick = null;
+      this.isDefend = false;
+    }
+  }
+  setParalyzed(gameTick: number): void {
+    this.paralyzedGameTick = gameTick;
+    this.isParalyzed = true;
+  }
+  setUnParalyzed(gameTick: number): void {
+    if (gameTick - this.defendGameTick >= 12) {
+      this.paralyzedGameTick = null;
+      this.isDefend = false;
+    }
   }
   canActed(currentUnit: GameUnit): boolean {
     switch (currentUnit.Action.constructor.name) {

@@ -13,9 +13,7 @@ import {
   StatusBar,
   useColorScheme,
   View,
-  Text,
   ScrollView,
-  TouchableOpacity,
 } from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {useDispatch, useSelector} from 'react-redux';
@@ -31,6 +29,7 @@ import GameUnit from './gameUnits/gameUnit';
 import {
   currentUnitIndexChange,
   orderedTeamChange,
+  restartGameTick,
 } from './redux/actions/gameActions';
 import {ChangeAllUnits} from './redux/actions/teamsActions';
 
@@ -57,6 +56,7 @@ const App = () => {
     const orderedUnits = orderedCurrentTeam(createdUnits);
     dispatch(orderedTeamChange(orderedUnits));
     dispatch(currentUnitIndexChange(0));
+    dispatch(restartGameTick());
   };
 
   useEffect(() => {
@@ -74,7 +74,7 @@ const App = () => {
       </Board>
       <ScrollView horizontal style={{height: 120, marginHorizontal: 10}}>
         {currentUnits?.map((item, index) => {
-          return <UnitCard index={index} unit={item} key={item.id} />;
+          return <UnitCard index={index} key={item.id} />;
         })}
       </ScrollView>
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>

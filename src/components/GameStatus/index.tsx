@@ -16,6 +16,8 @@ const GameStatus = (props: GameStatusProps) => {
     ({gameReducer}) => gameReducer.currentUnitIndex,
   );
 
+  const gameTick: number = useSelector(({gameReducer}) => gameReducer.gameTick);
+
   const units: GameUnit[] = useSelector(
     ({gameReducer}) => gameReducer.orderedUnits,
   );
@@ -30,13 +32,15 @@ const GameStatus = (props: GameStatusProps) => {
     setTeam2Hp(team2);
   };
 
-  useEffect(countTeamsHP, [units]);
+  useEffect(countTeamsHP, [currentIndex]);
 
   return (
     <View style={styles.statusBlock}>
       <View>
         <Text>Team 1 HP: {team1Hp}</Text>
         <Text>Team 2 HP: {team2Hp}</Text>
+        {/* <Text>Round: {Math.floor(gameTick / 12)}</Text> */}
+        <Text>gameTick: {gameTick}</Text>
         <Text>Current Team: {units[currentIndex]?.team}</Text>
       </View>
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
