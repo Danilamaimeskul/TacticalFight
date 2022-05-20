@@ -37,7 +37,6 @@ const MainMenuScreen = ({navigation}) => {
     ({gameReducer}) => gameReducer.orderedUnits,
   );
 
-  const [units, setUnits] = useState<GameUnit[]>([]);
   const dispatch = useDispatch();
 
   const backgroundStyle = {
@@ -48,7 +47,6 @@ const MainMenuScreen = ({navigation}) => {
     dispatch(ChangeAllUnits([]));
     dispatch(orderedTeamChange([]));
     const createdUnits = [...generateTeam(6, 1), ...generateTeam(6, 2)];
-    setUnits(createdUnits);
     dispatch(ChangeAllUnits(createdUnits));
     const orderedUnits = orderedCurrentTeam(createdUnits);
     dispatch(orderedTeamChange(orderedUnits));
@@ -57,21 +55,28 @@ const MainMenuScreen = ({navigation}) => {
     dispatch(chosenUnitIndexChange(null));
   };
 
-  useEffect(() => {
+  const newGame = () => {
     restart();
-  }, []);
+    navigation.navigate('Game');
+  };
+
+  const continueGame = () => {
+    navigation.navigate('Game');
+  };
 
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <View style={styles.menuBlock}>
         <Text style={styles.gameName}>Best Game Ever Made</Text>
-        <TouchableOpacity onPress={() => navigation.navigate('Game')}>
+        <TouchableOpacity onPress={newGame}>
           <Text style={styles.button}>New Game</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => console.log('continue')}>
-          <Text style={styles.button}>Continue</Text>
-        </TouchableOpacity>
+        {currentUnits.length !== 0 && (
+          <TouchableOpacity onPress={continueGame}>
+            <Text style={styles.button}>Continue</Text>
+          </TouchableOpacity>
+        )}
       </View>
     </SafeAreaView>
   );

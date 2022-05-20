@@ -10,8 +10,8 @@ interface GameStatusProps {
 }
 
 const GameStatus = (props: GameStatusProps) => {
-  const [team1Hp, setTeam1Hp] = useState(0);
-  const [team2Hp, setTeam2Hp] = useState(0);
+  const [team1Hp, setTeam1Hp] = useState(null);
+  const [team2Hp, setTeam2Hp] = useState(null);
 
   const currentIndex: number = useSelector(
     ({gameReducer}) => gameReducer.currentUnitIndex,
@@ -28,6 +28,7 @@ const GameStatus = (props: GameStatusProps) => {
     let team2: number = 0;
     units.forEach(item => {
       item.team === 1 ? (team1 += item.hp) : (team2 += item.hp);
+      console.log(team1, team2);
     });
     setTeam1Hp(team1);
     setTeam2Hp(team2);
@@ -49,10 +50,10 @@ const GameStatus = (props: GameStatusProps) => {
 
   useEffect(() => {
     countTeamsHP();
-    if (team1Hp <= 0 && gameTick) {
+    if (team1Hp <= 0 && gameTick && team1Hp !== null) {
       handleAlert(2);
     }
-    if (team2Hp <= 0 && gameTick) {
+    if (team2Hp <= 0 && gameTick && team2Hp !== null) {
       handleAlert(1);
     }
   }, [units, gameTick]);

@@ -43,6 +43,11 @@ const GameScreen = ({navigation}) => {
   const currentUnits: GameUnit[] = useSelector(
     ({gameReducer}) => gameReducer.orderedUnits,
   );
+
+  const unitsRedux: GameUnit[] = useSelector(
+    ({teamsReducer}) => teamsReducer.units,
+  );
+
   const [units, setUnits] = useState<GameUnit[]>([]);
   const dispatch = useDispatch();
 
@@ -60,7 +65,7 @@ const GameScreen = ({navigation}) => {
   };
 
   useEffect(() => {
-    restart();
+    setUnits(unitsRedux);
   }, []);
 
   return (
